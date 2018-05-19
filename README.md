@@ -2,11 +2,11 @@
 CI Scripts for Salesforce projects
 
 This repository purpose is to centralized Continuous Integration scripts dedicated to the Salesforce platform.
-It allow you to build your app, sanitized your repository (profile and permission sets) and automate things for you.
-Is has been designed and built to be fast, modular and to run with just npm as dependencies.
+It allows you to build your app, sanitized your repository (profile and permission sets) and automate things for you.
+It has been designed and built to be fast, modular and to run with just npm as dependencies.
 
 You can make it run into a basic alpine-node docker image.
-You can easily add a taks to this script for your own needs.
+You can easily add a tasks to this script for your own needs.
 
 Compatible and complementary to SalesforceDX
 
@@ -36,7 +36,7 @@ SFDC-ci-toolkit comes with handy npm scripts for CI :
 ```javascript
 "scripts": {
   "full-build": "npm run deploy",
-  "postfull-build": "nom run move-tag",
+  "postfull-build": "npm run move-tag",
   "predeploy": "gulp pre-deploy-script",
   "deploy": "gulp deploy",
   "postdeploy": "gulp post-deploy-script",
@@ -48,7 +48,8 @@ SFDC-ci-toolkit comes with handy npm scripts for CI :
   "profile-completion": "gulp profile-completion",
   "profile-reconciliation": "gulp profile-reconciliation",
   "generate-package": "gulp generate-package",
-  "generate-data-dictionary": "gulp generate-data-dictionary"
+  "generate-data-dictionary": "gulp generate-data-dictionary",
+  "display-coverage": "gulp read-coverage"
 }
 ```
 Combined them smartly according to your need as a developer or as a release manager ;)
@@ -64,6 +65,7 @@ Here is the list of scripts with their description available in the toolkit
 * **prepare-runtests** : Run it to generate SF_RUNTESTS based on the src/classes folder and the SF_TESTSUFFIX variable
 * **profile-completion** : Run it to complete your non admin profiles & permission sets with the removed user permissions
 * **profile-reconciliation** : Run it to check the consistency of your repo and the profiles & permission sets definition into it
+* **display-coverage** : Run it after having deploy with test runned. It will display the code coverage.
 
 ## Usage Example
 Let's imagine you finalized the three first steps of [building a Conference Management app](https://trailhead.salesforce.com/en/projects/salesforce_developer_workshop/steps/creating_apex_class) in your sandbox and you want to deploy it to your dev org!
@@ -114,7 +116,7 @@ $ git commit -m 'profile alignment'
 
 * **Incremental** : select the commit sha from which you want to compare and put it into a COMMIT variable into the .env file
 ```
-$ npm run prepare-package # Or if you have gulp globally installed: $ gulp prepare-package
+$ npm run partial-package # Or if you have gulp globally installed: $ gulp prepare-package
 $ git add src/package.xml src/destructive*
 $ git commit -m 'package creation'
 ```
